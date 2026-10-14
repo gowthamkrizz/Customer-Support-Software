@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Stackly | Command & Operations Center</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Fixed Navigation & Mobile Responsive Dashboard Style -->
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Backdrop Overlay for Mobile Drawer -->
+    <div class="dashboard-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Fixed Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <img src="assets/images/stackly-logo-white.webp" alt="Stackly Logo">
+        </a>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close Sidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="sidebar-section-title">ADMIN NAVIGATION</div>
+        <a href="#overviewSection" class="sidebar-link active"><i class="fas fa-chart-line"></i> <span>My Overview</span></a>
+        <a href="#activePlanSection" class="sidebar-link"><i class="fas fa-layer-group"></i> <span>Active Plan</span> <span class="sidebar-badge badge-live">Enterprise</span></a>
+        <a href="#myTicketsSection" class="sidebar-link"><i class="fas fa-ticket-alt"></i> <span>My Tickets</span> <span class="sidebar-badge badge-count">5</span></a>
+        <a href="#newTicketSection" class="sidebar-link"><i class="fas fa-plus-circle"></i> <span>New Ticket</span></a>
+        <a href="#invoicesSection" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> <span>Invoices & Billing</span></a>
+        <a href="#hardwareShopSection" class="sidebar-link"><i class="fas fa-shopping-bag"></i> <span>Hardware Shop</span></a>
+        <a href="#vipMembershipSection" class="sidebar-link"><i class="fas fa-crown"></i> <span>VIP Membership</span></a>
+
+        <!-- Separate Content: System Status Widget Card -->
+        <div class="sidebar-widget-card">
+          <div class="sidebar-widget-header">
+            <span class="widget-status-dot"></span>
+            <span>Enterprise NOC Hub</span>
+          </div>
+          <div class="sidebar-widget-body">
+            <div class="widget-metric">
+              <span>Carrier Uptime:</span>
+              <strong style="color: var(--secondary);">99.999%</strong>
+            </div>
+            <div class="widget-metric">
+              <span>Active Seats:</span>
+              <strong>142 / 150</strong>
+            </div>
+            <div class="widget-progress-bar">
+              <div class="widget-progress-fill" style="width: 94.6%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-user-box">
+        <img src="assets/images/team-1.webp" alt="Admin Avatar" class="sidebar-user-avatar">
+        <div class="sidebar-user-info">
+          <strong id="dashboardUserName">Admin User</strong>
+          <span id="dashboardUserEmail">admin@stackly.com</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-main">
+      <!-- Fixed Sticky Topbar -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left-group">
+          <button class="dashboard-mobile-toggle" id="sidebarOpenBtn" aria-label="Open Sidebar Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="topbar-portal-group">
+            <span class="topbar-portal-badge admin"><i class="fas fa-shield-alt"></i> Admin</span>
+            <div class="topbar-portal-title">
+              <strong>Operations Console</strong>
+            </div>
+          </div>
+
+          <div class="topbar-info-chip live-clock" title="Universal Coordinated Time">
+            <i class="far fa-clock" style="color: var(--primary);"></i>
+            <span id="adminLiveClock">--:--:-- UTC</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <span class="topbar-status-badge">
+            <span class="badge-dot-live"></span> 99.99% Online
+          </span>
+
+          <a href="404.html" class="topbar-badge-btn" title="Notifications" style="text-decoration:none;">
+            <i class="far fa-bell"></i>
+            <span class="badge-dot"></span>
+          </a>
+
+          <a href="login.html" class="btn btn-secondary btn-sm" style="flex-shrink: 0;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </header>
+
+      <!-- Dashboard Content Body -->
+      <div class="dashboard-content">
+
+        <!-- ========================================================
+             1. MY OVERVIEW SECTION
+             ======================================================== -->
+        <div id="overviewSection" class="dashboard-section-panel active">
+          <!-- Header title -->
+          <div class="dashboard-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+            <div>
+              <h1 style="font-size: 1.85rem; margin-bottom: 4px;">Command &amp; Operations Center</h1>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Real-time metrics for Stackly Global Cloud Telephony</p>
+            </div>
+            <div class="dashboard-header-btns" style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-outline btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-download"></i> Export PDF Report</button>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-broadcast-tower"></i> Broadcast To Floor</button>
+            </div>
+          </div>
+
+          <!-- KPI Metrics Grid -->
+          <div class="kpi-cards-grid">
+            <div class="kpi-card">
+              <div>
+                <span style="font-size: 0.82rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted);">Total Inbound Calls</span>
+                <div class="kpi-number counter-val" data-count="3482">3,482</div>
+                <div class="kpi-trend positive"><i class="fas fa-arrow-up"></i> +14.2% vs yesterday</div>
+              </div>
+              <div class="kpi-icon-wrap"><i class="fas fa-phone-alt"></i></div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <span style="font-size: 0.82rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted);">Avg Queue Wait Time</span>
+                <div class="kpi-number">14.8s</div>
+                <div class="kpi-trend positive"><i class="fas fa-arrow-down"></i> -3.4s improvement</div>
+              </div>
+              <div class="kpi-icon-wrap" style="background:#e6ffed; color:var(--secondary);"><i class="fas fa-stopwatch"></i></div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <span style="font-size: 0.82rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted);">First Call Resolution</span>
+                <div class="kpi-number">98.6%</div>
+                <div class="kpi-trend positive"><i class="fas fa-check"></i> Target 95% met</div>
+              </div>
+              <div class="kpi-icon-wrap" style="background:#f3e8ff; color:var(--primary);"><i class="fas fa-award"></i></div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <span style="font-size: 0.82rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted);">Active Agents Online</span>
+                <div class="kpi-number counter-val" data-count="142">142</div>
+                <div class="kpi-trend"><span style="color:var(--primary); font-weight:700;">88</span> On Call / <span style="color:var(--secondary); font-weight:700;">54</span> Ready</div>
+              </div>
+              <div class="kpi-icon-wrap" style="background:#e6f7ff; color:#1890ff;"><i class="fas fa-headset"></i></div>
+            </div>
+          </div>
+
+          <!-- Hourly Call Volume Visualizer & Channel Health -->
+          <div class="dashboard-split-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 30px;">
+            <!-- Hourly Volume Bar Graph Simulation -->
+            <div class="dashboard-table-card" style="margin-bottom: 0;">
+              <div class="dashboard-table-header">
+                <h3 style="font-size: 1.15rem; margin-bottom: 0;">Hourly Inbound Call Distribution (Today)</h3>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Peak: 11:00 AM - 2:00 PM EST</span>
+              </div>
+              <div style="display: flex; align-items: flex-end; justify-content: space-between; height: 180px; padding: 20px 10px 0; border-bottom: 2px solid var(--border-light);">
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary-light); height: 40px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">8 AM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary-light); height: 75px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">9 AM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary); height: 120px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">10 AM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary); height: 160px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">11 AM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary); height: 145px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">12 PM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary); height: 155px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">1 PM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary); height: 130px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">2 PM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary-light); height: 90px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">3 PM</span></div>
+                <div style="text-align: center; width: 8%;"><div style="background: var(--primary-light); height: 60px; border-radius: 4px 4px 0 0;"></div><span style="font-size:0.7rem; color:var(--text-muted);">4 PM</span></div>
+              </div>
+            </div>
+
+            <!-- Live Channel Status -->
+            <div class="dashboard-table-card" style="margin-bottom: 0;">
+              <div class="dashboard-table-header">
+                <h3 style="font-size: 1.15rem; margin-bottom: 0;">Channel Health</h3>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.88rem;"><i class="fas fa-phone" style="color:var(--primary); margin-right:8px;"></i> US East SIP Trunk</span>
+                  <span class="status-pill resolved">Healthy (8ms)</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.88rem;"><i class="fas fa-phone" style="color:var(--primary); margin-right:8px;"></i> EU Central Gateway</span>
+                  <span class="status-pill resolved">Healthy (12ms)</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.88rem;"><i class="fab fa-whatsapp" style="color:#25d366; margin-right:8px;"></i> WhatsApp Business API</span>
+                  <span class="status-pill resolved">Operational</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.88rem;"><i class="fas fa-comments" style="color:#1890ff; margin-right:8px;"></i> WebRTC Live Chat</span>
+                  <span class="status-pill resolved">Operational</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             2. ACTIVE PLAN SECTION
+             ======================================================== -->
+        <div class="dashboard-table-card dashboard-section-panel" id="activePlanSection">
+          <div class="dashboard-table-header" style="flex-wrap: wrap; gap: 15px;">
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase;"><i class="fas fa-shield-alt"></i> Corporate License</span>
+              <h3 style="font-size: 1.35rem; margin-bottom: 4px;">Enterprise Cloud PBX & Omnichannel Matrix</h3>
+              <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0;">Tier-1 Global Routing with 150 agent seats and dedicated carrier SIP trunking</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-outline btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-plus"></i> Add SIP Lines</button>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-award"></i> Manage Subscription</button>
+            </div>
+          </div>
+
+          <div style="margin: 18px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.88rem;">
+              <span>Allocated Inbound Minutes: <strong>42,800 / 100,000 used</strong> (57.2% capacity remaining)</span>
+              <span style="font-weight: 700; color: var(--secondary);"><i class="fas fa-check-circle"></i> Renewal: 28 Days Left</span>
+            </div>
+            <div style="height: 10px; background: #e8ecf4; border-radius: 99px; overflow: hidden;">
+              <div style="height: 100%; width: 42.8%; background: linear-gradient(90deg, var(--primary), #00d084); border-radius: 99px;"></div>
+            </div>
+          </div>
+
+          <!-- Plan Quotas Sub-Grid -->
+          <div class="dashboard-quotas-subgrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border-light);">
+            <div style="background: var(--bg-light); padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-light);">
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Active Carrier Lines</span>
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--dark-navy); margin-top: 4px;">12 Toll-Free Lines</div>
+              <span style="font-size: 0.76rem; color: var(--secondary); font-weight: 600;"><i class="fas fa-check"></i> 100% SLA Uptime</span>
+            </div>
+            <div style="background: var(--bg-light); padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-light);">
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Simultaneous Calls</span>
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--dark-navy); margin-top: 4px;">300 Concurrent Ch.</div>
+              <span style="font-size: 0.76rem; color: var(--primary); font-weight: 600;"><i class="fas fa-bolt"></i> Bursting Enabled</span>
+            </div>
+            <div style="background: var(--bg-light); padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-light);">
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Emergency NOC SLA</span>
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--dark-navy); margin-top: 4px;">Under 15 Mins</div>
+              <span style="font-size: 0.76rem; color: var(--secondary); font-weight: 600;"><i class="fas fa-headset"></i> 24/7/365 Direct VIP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             3. MY TICKETS SECTION
+             ======================================================== -->
+        <div class="dashboard-table-card dashboard-section-panel" id="myTicketsSection">
+          <div class="dashboard-table-header" style="flex-wrap: wrap; gap: 15px;">
+            <div>
+              <h3 style="font-size: 1.2rem; margin-bottom: 4px;">My Tickets & Escalation Queue</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Priority ticketing and active call supervisor actions</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="shop-cat-btn ticket-filter-btn active" data-status="all" onclick="window.location.href='404.html';">All (5)</button>
+              <button class="shop-cat-btn ticket-filter-btn" data-status="open" onclick="window.location.href='404.html';">Open (2)</button>
+              <button class="shop-cat-btn ticket-filter-btn" data-status="progress" onclick="window.location.href='404.html';">In Progress (2)</button>
+              <button class="shop-cat-btn ticket-filter-btn" data-status="resolved" onclick="window.location.href='404.html';">Resolved (1)</button>
+            </div>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Customer / Caller</th>
+                  <th>Channel</th>
+                  <th>Assigned Specialist</th>
+                  <th>Status</th>
+                  <th>Duration</th>
+                  <th>Supervisor Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="ticket-row" data-status="progress">
+                  <td><strong>#TCK-9401</strong></td>
+                  <td>Global Logistics Corp (David R.)</td>
+                  <td><i class="fas fa-phone-alt" style="color:var(--primary);"></i> Inbound VoIP</td>
+                  <td>Alex Joan</td>
+                  <td><span class="status-pill progress">In Progress</span></td>
+                  <td>04:18</td>
+                  <td><button class="btn btn-outline btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-headphones"></i> Listen</button></td>
+                </tr>
+
+                <tr class="ticket-row" data-status="open">
+                  <td><strong>#TCK-9402</strong></td>
+                  <td>Apex Finance Ltd (Elena M.)</td>
+                  <td><i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp</td>
+                  <td>Unassigned</td>
+                  <td><span class="status-pill open">Open / Waiting</span></td>
+                  <td>00:45</td>
+                  <td><button class="btn btn-primary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-user-plus"></i> Claim</button></td>
+                </tr>
+
+                <tr class="ticket-row" data-status="progress">
+                  <td><strong>#TCK-9403</strong></td>
+                  <td>Nexa Health Group (Dr. Lee)</td>
+                  <td><i class="fas fa-phone-alt" style="color:var(--primary);"></i> Urgent Line</td>
+                  <td>John Harris</td>
+                  <td><span class="status-pill progress">In Progress</span></td>
+                  <td>08:32</td>
+                  <td><button class="btn btn-outline btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-microphone-alt"></i> Barge-in</button></td>
+                </tr>
+
+                <tr class="ticket-row" data-status="open">
+                  <td><strong>#TCK-9404</strong></td>
+                  <td>Retail Brands USA (Sarah K.)</td>
+                  <td><i class="fas fa-envelope" style="color:#fa8c16;"></i> Email Inquiry</td>
+                  <td>Unassigned</td>
+                  <td><span class="status-pill open">Open</span></td>
+                  <td>02:10</td>
+                  <td><button class="btn btn-primary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-reply"></i> Reply</button></td>
+                </tr>
+
+                <tr class="ticket-row" data-status="resolved">
+                  <td><strong>#TCK-9398</strong></td>
+                  <td>CloudTech Systems (Marcus B.)</td>
+                  <td><i class="fas fa-phone-alt" style="color:var(--primary);"></i> Inbound VoIP</td>
+                  <td>Amine Jazouli</td>
+                  <td><span class="status-pill resolved">Resolved (CSAT 5★)</span></td>
+                  <td>05:40</td>
+                  <td><button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-play"></i> Audio</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             4. NEW TICKET SECTION
+             ======================================================== -->
+        <div class="dashboard-table-card dashboard-section-panel" id="newTicketSection">
+          <div class="dashboard-table-header">
+            <div>
+              <h3 style="font-size: 1.2rem; margin-bottom: 4px;"><i class="fas fa-plus-circle" style="color:var(--primary); margin-right:8px;"></i> Open New Support & NOC Escalation Ticket</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Submit urgent carrier routing, trunk allocation, or floor issues directly to Tier-3 engineering</p>
+            </div>
+          </div>
+
+          <form id="adminTicketForm" action="404.html" method="GET">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Subject / Issue Summary *</label>
+                <input type="text" class="form-control" placeholder="e.g. SIP Trunk failover test for US West gateway" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-control">
+                  <option selected>Carrier Infrastructure & SIP Trunks</option>
+                  <option>Agent Headset & Hardware Dispatch</option>
+                  <option>IVR Voice Flow Architect</option>
+                  <option>Billing, Invoices & Minutes Add-on</option>
+                  <option>Emergency NOC Escalation</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Priority Level</label>
+                <select class="form-control">
+                  <option>Normal (Standard SLA - 2 hrs)</option>
+                  <option selected>High (Priority SLA - 30 mins)</option>
+                  <option>Urgent NOC Outage (Immediate NOC Dispatch)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Assigned Specialist</label>
+                <select class="form-control">
+                  <option selected>Auto-Assign Level-3 NOC</option>
+                  <option>Alex Joan (Senior Telecom Architect)</option>
+                  <option>John Harris (Voice Infrastructure Lead)</option>
+                  <option>Amine Jazouli (SIP Routing Specialist)</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Detailed Description *</label>
+                <textarea class="form-control" rows="3" placeholder="Provide full details, CID logs, affected SIP extensions, or gateway trace information..." required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="window.location.href='404.html';"><i class="fas fa-paper-plane"></i> Dispatch Ticket to Engineering</button>
+          </form>
+        </div>
+
+        <!-- ========================================================
+             5. INVOICES & BILLING SECTION
+             ======================================================== -->
+        <div class="dashboard-table-card dashboard-section-panel" id="invoicesSection">
+          <div class="dashboard-table-header" style="flex-wrap: wrap; gap: 15px;">
+            <div>
+              <h3 style="font-size: 1.2rem; margin-bottom: 4px;"><i class="fas fa-file-invoice-dollar" style="color:var(--primary); margin-right:8px;"></i> Recent Invoices & Billing Statements</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Enterprise telephony invoices, SIP bandwidth usage, and tax statements</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-file-csv"></i> Export CSV</button>
+              <button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-credit-card"></i> Payment Methods</button>
+            </div>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Billing Period</th>
+                  <th>Carrier Usage</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Receipt Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#INV-2026-10</strong></td>
+                  <td>October 2026 (Enterprise 150 Seats)</td>
+                  <td>42,800 Mins Inbound</td>
+                  <td><strong>$1,450.00</strong></td>
+                  <td><span class="status-pill resolved">Paid (Auto-Debit)</span></td>
+                  <td><button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-file-pdf"></i> Download PDF</button></td>
+                </tr>
+                <tr>
+                  <td><strong>#INV-2026-09</strong></td>
+                  <td>September 2026 (Enterprise 150 Seats)</td>
+                  <td>48,120 Mins Inbound</td>
+                  <td><strong>$1,450.00</strong></td>
+                  <td><span class="status-pill resolved">Paid</span></td>
+                  <td><button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-file-pdf"></i> Download PDF</button></td>
+                </tr>
+                <tr>
+                  <td><strong>#INV-2026-08</strong></td>
+                  <td>August 2026 (Enterprise 150 Seats)</td>
+                  <td>41,300 Mins Inbound</td>
+                  <td><strong>$1,450.00</strong></td>
+                  <td><span class="status-pill resolved">Paid</span></td>
+                  <td><button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-file-pdf"></i> Download PDF</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             6. HARDWARE SHOP SECTION
+             ======================================================== -->
+        <div class="dashboard-table-card dashboard-section-panel" id="hardwareShopSection">
+          <div class="dashboard-table-header" style="flex-wrap: wrap; gap: 15px;">
+            <div>
+              <h3 style="font-size: 1.2rem; margin-bottom: 4px;"><i class="fas fa-shopping-bag" style="color:var(--primary); margin-right:8px;"></i> Hardware Shop & Certified Telecom Equipment</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Enterprise-certified noise cancelling headsets, VoIP SIP phones, and carrier gateway controllers</p>
+            </div>
+            <a href="404.html" class="btn btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> View Full Hardware Shop</a>
+          </div>
+
+          <div class="dashboard-shop-grid">
+            <!-- Hardware Item 1 -->
+            <div class="dashboard-shop-item">
+              <div>
+                <span class="shop-item-badge in-stock"><i class="fas fa-check-circle"></i> In Stock (Certified)</span>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px;">Poly Voyager Focus 2 UC</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">Acoustic fence active noise cancelling, Bluetooth 5.1, 19 hours talk time.</p>
+              </div>
+              <div>
+                <div class="shop-item-price">$199.00</div>
+                <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="window.location.href='404.html';">
+                  <i class="fas fa-cart-plus"></i> Order for Agents
+                </button>
+              </div>
+            </div>
+
+            <!-- Hardware Item 2 -->
+            <div class="dashboard-shop-item">
+              <div>
+                <span class="shop-item-badge in-stock"><i class="fas fa-check-circle"></i> In Stock (Pre-Configured)</span>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px;">Yealink T54W Prime IP Phone</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">4.3" color LCD, 16 VoIP accounts, dual-band Wi-Fi, USB 2.0 recording support.</p>
+              </div>
+              <div>
+                <div class="shop-item-price">$149.00</div>
+                <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="window.location.href='404.html';">
+                  <i class="fas fa-cart-plus"></i> Order Hardware
+                </button>
+              </div>
+            </div>
+
+            <!-- Hardware Item 3 -->
+            <div class="dashboard-shop-item">
+              <div>
+                <span class="shop-item-badge noc"><i class="fas fa-shield-alt"></i> Enterprise NOC Gear</span>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px;">Cisco Catalyst 1000 Gateway</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">Carrier-grade SIP session controller, 24-port PoE+, redundant power delivery.</p>
+              </div>
+              <div>
+                <div class="shop-item-price">$549.00</div>
+                <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="window.location.href='404.html';">
+                  <i class="fas fa-server"></i> Request Deployment
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             7. VIP MEMBERSHIP SECTION
+             ======================================================== -->
+        <div class="dashboard-table-card dashboard-section-panel" id="vipMembershipSection">
+          <div class="dashboard-table-header" style="flex-wrap: wrap; gap: 15px;">
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #faad14; text-transform: uppercase;"><i class="fas fa-crown"></i> Elite Privilege Tier</span>
+              <h3 style="font-size: 1.25rem; margin-bottom: 4px;">VIP Enterprise Membership & Executive Privileges</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Dedicated level-3 engineering concierge, zero-wait priority line, and guaranteed SLA resolution</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-outline btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-calendar-check"></i> Book VIP Briefing</button>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='404.html';"><i class="fas fa-file-contract"></i> View SLA Contract</button>
+            </div>
+          </div>
+
+          <!-- VIP Status Banner -->
+          <div style="background: linear-gradient(135deg, #21052b 0%, #181b2a 100%); border: 1px solid rgba(193, 46, 222, 0.35); border-radius: 14px; padding: 16px 20px; color: #ffffff; display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(193, 46, 222, 0.25); display: flex; align-items: center; justify-content: center; color: #f6e6fc; font-size: 1.25rem;">
+                <i class="fas fa-gem"></i>
+              </div>
+              <div>
+                <strong style="font-size: 1.05rem; display: block; color: #ffffff;">VIP DIAMOND ENTERPRISE STATUS — ACTIVE</strong>
+                <span style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Your company holds the highest priority tier across all global voice gateways. Valid through Oct 2027.</span>
+              </div>
+            </div>
+            <span class="status-pill resolved" style="padding: 6px 14px; font-weight: 700;">Verified VIP Holder</span>
+          </div>
+
+          <!-- VIP Privileges 3-Grid -->
+          <div class="vip-privileges-grid">
+            <div class="vip-privilege-card">
+              <div class="vip-privilege-icon"><i class="fas fa-user-shield"></i></div>
+              <h4 style="font-size: 1rem; margin-bottom: 2px;">Dedicated L3 NOC Engineer</h4>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">Direct private phone extension to your dedicated telecom engineer without waiting in any customer queue.</p>
+            </div>
+
+            <div class="vip-privilege-card">
+              <div class="vip-privilege-icon"><i class="fas fa-stopwatch-20"></i></div>
+              <h4 style="font-size: 1rem; margin-bottom: 2px;">15-Min Guaranteed Resolution</h4>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">Under our Master SLA agreement, any routing disruption triggers automatic failover and senior engineer intervention within 15 minutes.</p>
+            </div>
+
+            <div class="vip-privilege-card">
+              <div class="vip-privilege-icon"><i class="fas fa-magic"></i></div>
+              <h4 style="font-size: 1rem; margin-bottom: 2px;">Bespoke AI Voice Flow Studio</h4>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">Complimentary quarterly voice synthesizer fine-tuning, bespoke neural TTS prompts, and AI sentiment calibrations.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Tab switching between dedicated section panels
+    function activateDashboardSection(targetId) {
+      if (!targetId) return;
+      var cleanId = targetId.replace('#', '');
+      var targetSection = document.getElementById(cleanId);
+      if (!targetSection) return;
+
+      // Hide all section panels
+      var allPanels = document.querySelectorAll('.dashboard-section-panel');
+      allPanels.forEach(function(panel) {
+        panel.classList.remove('active');
+      });
+
+      // Show the selected section panel
+      targetSection.classList.add('active');
+
+      // Update sidebar links active class
+      var links = document.querySelectorAll('.dashboard-sidebar .sidebar-link');
+      links.forEach(function(l) {
+        var href = l.getAttribute('href');
+        var dataTarget = l.getAttribute('data-target');
+        if (href === '#' + cleanId || dataTarget === cleanId) {
+          l.classList.add('active');
+        } else {
+          l.classList.remove('active');
+        }
+      });
+
+      // Scroll smoothly to top of main content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    (function() {
+      try {
+        var authData = localStorage.getItem('stackly_auth_user');
+        var regData = localStorage.getItem('stackly_registered_user');
+        var u = authData ? JSON.parse(authData) : (regData ? JSON.parse(regData) : null);
+        if (u) {
+          var name = u.fullName || u.name || (u.firstName ? (u.firstName + ' ' + (u.lastName || '')).trim() : u.username);
+          if (name) document.getElementById('dashboardUserName').textContent = name;
+          if (u.email) document.getElementById('dashboardUserEmail').textContent = u.email;
+        }
+
+        var openBtn = document.getElementById('sidebarOpenBtn');
+        var closeBtn = document.getElementById('sidebarCloseBtn');
+        var sidebar = document.querySelector('.dashboard-sidebar');
+        var overlay = document.getElementById('sidebarOverlay');
+        function openNav() {
+          if (sidebar) sidebar.classList.add('active');
+          if (overlay) overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeNav() {
+          if (sidebar) sidebar.classList.remove('active');
+          if (overlay) overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        if (openBtn) openBtn.onclick = openNav;
+        if (closeBtn) closeBtn.onclick = closeNav;
+        if (overlay) overlay.onclick = closeNav;
+
+        // Hook all links that link to sections (sidebar and internal jump links)
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a[href^="#"]');
+          if (link) {
+            var href = link.getAttribute('href');
+            if (href && href.length > 1) {
+              var targetEl = document.getElementById(href.substring(1));
+              if (targetEl && targetEl.classList.contains('dashboard-section-panel')) {
+                e.preventDefault();
+                activateDashboardSection(href.substring(1));
+                history.pushState(null, null, href);
+                if (window.innerWidth <= 992) {
+                  closeNav();
+                }
+              }
+            }
+          }
+        });
+
+        // Check if there is an initial hash in the URL
+        if (window.location.hash) {
+          var initTarget = window.location.hash.substring(1);
+          if (document.getElementById(initTarget)) {
+            activateDashboardSection(initTarget);
+          }
+        }
+
+        window.addEventListener('hashchange', function() {
+          if (window.location.hash) {
+            activateDashboardSection(window.location.hash.substring(1));
+          }
+        });
+      } catch(e) {}
+    })();
+
+    // Admin Ticket Form Submission - redirects to 404 error page
+    var ticketForm = document.getElementById('adminTicketForm');
+    if (ticketForm) {
+      ticketForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        window.location.href = '404.html';
+      });
+    }
+
+    // Ensure all buttons across dashboard sections redirect to 404 error page
+    document.querySelectorAll('.dashboard-section-panel button, .dashboard-section-panel .btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = '404.html';
+      });
+    });
+
+    // Live UTC Clock ticker for NOC Operations
+    (function initNocClock() {
+      function tick() {
+        var clockEl = document.getElementById('adminLiveClock');
+        if (clockEl) {
+          var d = new Date();
+          var h = String(d.getUTCHours()).padStart(2, '0');
+          var m = String(d.getUTCMinutes()).padStart(2, '0');
+          var s = String(d.getUTCSeconds()).padStart(2, '0');
+          clockEl.textContent = h + ':' + m + ':' + s + ' UTC';
+        }
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>

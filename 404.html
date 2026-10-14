@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Line Disconnected | Stackly Call Center & Customer Solutions</title>
+  <link rel="icon" type="image/webp" href="assets/images/stackly-logo.webp">
+  
+  <!-- Google Fonts: Ubuntu & Poppins (Theme Fonts) + Newsreader/Playfair for elegant serif accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..700&family=Poppins:wght@300;400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ==========================================================================
+       404 ERROR PAGE - THEME SPECIALIZED STYLING & ANIMATIONS
+       Theme: Stackly Call Center & Telecom Solutions
+       ========================================================================== */
+    :root {
+      --error-grid-line: rgba(193, 46, 222, 0.065);
+      --error-grid-line-alt: rgba(24, 27, 42, 0.04);
+      --error-bg: #faf8fc;
+      --error-orb-start: #1c0827;
+      --error-orb-mid: #380b4b;
+      --error-orb-end: #0f402f;
+      --pill-green-bg: #ecfdf5;
+      --pill-green-border: #a7f3d0;
+      --pill-green-text: #065f46;
+      --pill-purple-bg: #f5e8fc;
+      --pill-purple-border: #e2bbf8;
+      --pill-purple-text: #6b1480;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body.error-page-body {
+      min-height: 100vh;
+      width: 100%;
+      background-color: var(--error-bg);
+      background-image: 
+        radial-gradient(circle at 50% 25%, rgba(193, 46, 222, 0.09) 0%, transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(0, 208, 132, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 15% 75%, rgba(6, 147, 227, 0.06) 0%, transparent 45%),
+        linear-gradient(to right, var(--error-grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--error-grid-line) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+      font-family: var(--font-body, 'Ubuntu', sans-serif);
+      color: var(--text-dark, #22242e);
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Ambient animated lighting */
+    .error-ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientPulse 8s ease-in-out infinite alternate;
+    }
+    .orb-1 {
+      width: 450px;
+      height: 450px;
+      background: rgba(193, 46, 222, 0.12);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .orb-2 {
+      width: 320px;
+      height: 320px;
+      background: rgba(0, 208, 132, 0.1);
+      bottom: 50px;
+      left: 10%;
+      animation-delay: -3s;
+    }
+    .orb-3 {
+      width: 350px;
+      height: 350px;
+      background: rgba(6, 147, 227, 0.08);
+      top: 30%;
+      right: 5%;
+      animation-delay: -5s;
+    }
+
+    @keyframes ambientPulse {
+      0% { transform: translateY(0) scale(1); opacity: 0.6; }
+      100% { transform: translateY(25px) scale(1.15); opacity: 0.95; }
+    }
+
+    /* Page container */
+    .error-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 30px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: space-between;
+    }
+
+    /* Top Brand Section */
+    .error-top-brand {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 25px;
+      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .error-logo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .error-logo-link:hover {
+      transform: scale(1.04);
+    }
+
+    .error-logo-img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Floating Status Telemetry Badges (Matched to Screenshot Layout) */
+    .floating-chip {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 15px;
+      border-radius: var(--radius-full, 9999px);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 15px rgba(24, 27, 42, 0.05);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 3;
+      user-select: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+    }
+
+    .floating-chip:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(24, 27, 42, 0.1);
+    }
+
+    /* Top Center Registry Pill */
+    .chip-top-center {
+      top: 95px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--pill-green-bg);
+      border: 1px solid var(--pill-green-border);
+      color: var(--pill-green-text);
+      font-family: var(--font-nav, 'Poppins', sans-serif);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-size: 0.74rem;
+      padding: 8px 20px;
+      animation: floatSubtle 6s ease-in-out infinite;
+    }
+
+    .chip-top-center .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--secondary, #00d084);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 0 0 rgba(0, 208, 132, 0.7);
+      animation: pulseGreen 2s infinite;
+    }
+
+    /* Top Left: Queue Archive */
+    .chip-top-left {
+      top: 155px;
+      left: 8%;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+      animation: floatGentle1 7s ease-in-out infinite alternate;
+    }
+
+    /* Mid Left: Frequency Telemetry */
+    .chip-mid-left {
+      top: 375px;
+      left: 4%;
+      background: #ffffff;
+      border: 1px solid #e9d5ff;
+      color: var(--primary-dark, #84109b);
+      font-size: 0.75rem;
+      animation: floatGentle2 8s ease-in-out infinite alternate;
+    }
+
+    /* Bottom Left: NOC Gateway */
+    .chip-bottom-left {
+      bottom: 210px;
+      left: 6%;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      color: #334155;
+      animation: floatGentle1 6.5s ease-in-out infinite alternate;
+    }
+
+    /* Bottom Left Tech Code Tag */
+    .code-tag-bottom-left {
+      bottom: 140px;
+      left: 10%;
+      background: rgba(243, 244, 246, 0.85);
+      border: 1px solid #e5e7eb;
+      color: #059669;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      animation: floatGentle2 7.5s ease-in-out infinite alternate;
+    }
+
+    /* Top Right: Call No / Trunk ID */
+    .chip-top-right {
+      top: 185px;
+      right: 7%;
+      background: #ffffff;
+      border: 1px solid #f1f5f9;
+      color: #475569;
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 0.84rem;
+      font-weight: 500;
+      animation: floatGentle2 7s ease-in-out infinite alternate;
+    }
+
+    /* Mid Right: Telecom Catalog Seats */
+    .chip-mid-right {
+      top: 480px;
+      right: 5%;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      animation: floatGentle1 8s ease-in-out infinite alternate;
+    }
+
+    /* Bottom Right: Carrier SLA Authenticated */
+    .chip-bottom-right {
+      bottom: 245px;
+      right: 9%;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      animation: floatGentle2 6s ease-in-out infinite alternate;
+    }
+
+    /* Floating Keyframes */
+    @keyframes floatSubtle {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -6px); }
+    }
+
+    @keyframes floatGentle1 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-12px) rotate(1deg); }
+    }
+
+    @keyframes floatGentle2 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(14px) rotate(-1deg); }
+    }
+
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(0, 208, 132, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(0, 208, 132, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 208, 132, 0); }
+    }
+
+    /* MAIN HERO 404 DISPLAY */
+    .error-main-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 780px;
+      width: 100%;
+      margin: 40px auto 30px;
+      z-index: 4;
+    }
+
+    /* Massive 4 [Orb] 4 Layout */
+    .error-digits-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      line-height: 1;
+      margin-bottom: 20px;
+      user-select: none;
+      animation: scaleFadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .error-giant-digit {
+      font-family: 'Newsreader', 'Ubuntu', Georgia, serif;
+      font-size: clamp(6.5rem, 16vw, 11.5rem);
+      font-weight: 800;
+      color: #1a1d2e;
+      letter-spacing: -3px;
+      text-shadow: 0 10px 30px rgba(24, 27, 42, 0.08);
+      position: relative;
+    }
+
+    /* Center Glowing Sphere / Circular Badge (Replacing '0') */
+    .error-center-sphere {
+      position: relative;
+      width: clamp(110px, 16vw, 160px);
+      height: clamp(110px, 16vw, 160px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #3d1454 0%, #20082b 60%, #110317 100%);
+      box-shadow: 
+        0 0 45px rgba(193, 46, 222, 0.45),
+        0 15px 35px rgba(24, 27, 42, 0.35),
+        inset 0 0 25px rgba(193, 46, 222, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 5px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      cursor: pointer;
+      animation: orbPulse 4s ease-in-out infinite alternate;
+    }
+
+    .error-center-sphere:hover {
+      transform: scale(1.08) rotate(3deg);
+      box-shadow: 
+        0 0 65px rgba(193, 46, 222, 0.65),
+        0 20px 45px rgba(24, 27, 42, 0.45),
+        inset 0 0 30px rgba(0, 208, 132, 0.4);
+    }
+
+    .error-center-sphere::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #c12ede, #00d084, #0693e3, #c12ede);
+      z-index: -1;
+      opacity: 0.65;
+      animation: rotateRing 8s linear infinite;
+      filter: blur(4px);
+    }
+
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes orbPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.04); }
+    }
+
+    /* Headset Icon inside Orb */
+    .sphere-icon-wrap {
+      font-size: clamp(2rem, 4.5vw, 2.85rem);
+      color: #f7e02a;
+      text-shadow: 0 0 15px rgba(247, 224, 42, 0.65);
+      animation: phoneSignalVibrate 3s ease-in-out infinite;
+    }
+
+    @keyframes phoneSignalVibrate {
+      0%, 100% { transform: rotate(0deg); }
+      5%, 15% { transform: rotate(-8deg); }
+      10%, 20% { transform: rotate(8deg); }
+      25% { transform: rotate(0deg); }
+    }
+
+    /* Pill badge inside the Sphere */
+    .sphere-status-pill {
+      background: #00d084;
+      color: #064e3b;
+      font-family: var(--font-nav, 'Poppins', sans-serif);
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--radius-full, 9999px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Headings (Matched to Screenshot Style) */
+    .error-heading {
+      font-family: 'Newsreader', 'Ubuntu', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: #181b2a;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+      animation: fadeInUp 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Highlighted Capsule Pill for the Sub-heading */
+    .error-highlight-pill-wrap {
+      display: inline-block;
+      margin-bottom: 22px;
+      animation: fadeInUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .error-highlight-pill {
+      display: inline-block;
+      background: #dcfce7;
+      border: 1.5px solid #86efac;
+      color: #14532d;
+      font-family: 'Newsreader', 'Ubuntu', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      padding: 2px 28px;
+      border-radius: var(--radius-full, 9999px);
+      box-shadow: 0 4px 15px rgba(22, 101, 52, 0.08);
+      letter-spacing: -0.5px;
+    }
+
+    /* Subtext Paragraph */
+    .error-description {
+      font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+      line-height: 1.65;
+      color: #4b5563;
+      max-width: 650px;
+      margin: 0 auto 32px;
+      font-family: var(--font-body, 'Ubuntu', sans-serif);
+      animation: fadeInUp 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Action Buttons Row */
+    .error-actions-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      animation: fadeInUp 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Primary Button: Exact look of "Browse Bookstore ↗" from screenshot, themed to Stackly Call Center */
+    .btn-error-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #4ade80;
+      background-image: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: #ffffff;
+      font-family: var(--font-nav, 'Poppins', sans-serif);
+      font-size: 0.96rem;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: var(--radius-full, 9999px);
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-error-primary:hover {
+      background-image: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(34, 197, 94, 0.45);
+      color: #ffffff;
+    }
+
+    /* Secondary Button: Exact look of "Previous Chapter" from screenshot */
+    .btn-error-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #ffffff;
+      color: #374151;
+      font-family: var(--font-nav, 'Poppins', sans-serif);
+      font-size: 0.96rem;
+      font-weight: 600;
+      padding: 13px 26px;
+      border-radius: var(--radius-full, 9999px);
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1.5px solid #e5e7eb;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .btn-error-secondary:hover {
+      background: #f9fafb;
+      border-color: #d1d5db;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      color: #111827;
+    }
+
+
+    /* Audio Equalizer Live Visualizer Strip */
+    .telecom-equalizer-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-full);
+      padding: 6px 16px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      animation: fadeInUp 0.8s 0.65s both;
+    }
+
+    .equalizer-text {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .equalizer-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      animation: eqBounce 1.2s ease-in-out infinite alternate;
+    }
+    .eq-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+    .eq-bar:nth-child(2) { height: 12px; animation-delay: 0.3s; background: var(--secondary); }
+    .eq-bar:nth-child(3) { height: 8px; animation-delay: 0.5s; }
+    .eq-bar:nth-child(4) { height: 14px; animation-delay: 0.2s; background: var(--secondary); }
+    .eq-bar:nth-child(5) { height: 5px; animation-delay: 0.4s; }
+
+    @keyframes eqBounce {
+      0% { transform: scaleY(0.3); }
+      100% { transform: scaleY(1); }
+    }
+
+    /* Footer Bar */
+    .error-footer-bar {
+      width: 100%;
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 22px 16px 26px;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 3;
+    }
+
+    .error-copyright-note {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleFadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .chip-top-left { left: 3%; top: 130px; }
+      .chip-top-right { right: 3%; top: 140px; }
+      .chip-mid-left { display: none; }
+      .chip-bottom-left { bottom: 170px; left: 3%; }
+      .chip-bottom-right { bottom: 180px; right: 3%; }
+      .code-tag-bottom-left { display: none; }
+      .chip-mid-right { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .error-wrapper {
+        padding: 20px 16px 30px;
+      }
+      .chip-top-center {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        animation: none;
+      }
+      .floating-chip {
+        display: none !important;
+      }
+      .error-digits-row {
+        gap: 10px;
+      }
+      .error-giant-digit {
+        font-size: 5rem;
+      }
+      .error-center-sphere {
+        width: 90px;
+        height: 90px;
+      }
+      .sphere-icon-wrap {
+        font-size: 1.8rem;
+      }
+      .error-heading {
+        font-size: 1.9rem;
+      }
+      .error-highlight-pill {
+        font-size: 1.9rem;
+        padding: 2px 18px;
+      }
+      .error-actions-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-error-primary, .btn-error-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body class="error-page-body">
+
+  <!-- Ambient glowing lighting orbs -->
+  <div class="error-ambient-orb orb-1"></div>
+  <div class="error-ambient-orb orb-2"></div>
+  <div class="error-ambient-orb orb-3"></div>
+
+  <!-- FLOATING STATUS TELEMETRY BADGES (Matched to Reference Screenshot) -->
+  
+  <!-- 1. Top Center Registry Pill -->
+  <div class="floating-chip chip-top-center">
+    <span class="pulse-dot"></span>
+    <span>SWITCHBOARD REGISTRY: EXTENSION NOT FOUND &bull; ERROR 404</span>
+  </div>
+
+  <!-- 2. Top Left: Agent Routing -->
+  <div class="floating-chip chip-top-left">
+    <i class="fas fa-headset" style="color: #16a34a;"></i>
+    <span>Call Center Routing: <strong>99.9% Dispatched</strong></span>
+  </div>
+
+  <!-- 3. Mid Left: VoIP Frequency -->
+  <div class="floating-chip chip-mid-left">
+    <i class="fas fa-tower-broadcast" style="color: var(--primary);"></i>
+    <span>PBX Frequency: <strong>0.00 MHz &bull; Dead Line</strong></span>
+  </div>
+
+  <!-- 4. Bottom Left: NOC Gateway -->
+  <div class="floating-chip chip-bottom-left">
+    <i class="fas fa-shield-halved" style="color: #10b981;"></i>
+    <span>Global NOC Gateway: <strong>Operational</strong></span>
+  </div>
+
+  <!-- 5. Bottom Left Monospace Code Tag -->
+  <div class="code-tag-bottom-left">
+    [SIP-REGISTRY: EXT_404_UNREACHABLE]
+  </div>
+
+  <!-- 6. Top Right: Trunk Line & Folio -->
+  <div class="floating-chip chip-top-right">
+    <i class="fas fa-network-wired" style="color: #64748b; margin-right: 2px;"></i>
+    Trunk Route: <em>STCK-404 / SIP.NULL</em>
+  </div>
+
+  <!-- 7. Mid Right: Active Seats -->
+  <div class="floating-chip chip-mid-right">
+    <i class="fas fa-users-viewfinder" style="color: #d97706;"></i>
+    <span>Contact Center Grid: <strong>10,000+ Active Seats</strong></span>
+  </div>
+
+  <!-- 8. Bottom Right: Carrier SLA Authenticated -->
+  <div class="floating-chip chip-bottom-right">
+    <i class="fas fa-circle-check" style="color: #16a34a;"></i>
+    <span>Tier-1 Telecom &bull; ISO 27001 Authenticated</span>
+  </div>
+
+  <!-- Main Error Page Wrapper -->
+  <div class="error-wrapper">
+    
+    <!-- Top Centered Brand Logo -->
+    <header class="error-top-brand">
+      <a href="index.html" class="error-logo-link" title="Return to Stackly Home">
+        <img src="assets/images/stackly-logo.webp" alt="Stackly Logo" class="error-logo-img">
+      </a>
+    </header>
+
+    <!-- Main Hero 404 Display -->
+    <main class="error-main-content">
+      
+      <!-- Big "4 [Sphere] 4" -->
+      <div class="error-digits-row" aria-label="Error 404">
+        <span class="error-giant-digit">4</span>
+        
+        <!-- Center Glowing Interactive Sphere -->
+        <div class="error-center-sphere" id="interactiveSphere" title="Click to test switchboard connection" onclick="testLinePing();">
+          <div class="sphere-icon-wrap">
+            <i class="fas fa-headset"></i>
+          </div>
+          <span class="sphere-status-pill">LINE DROPPED</span>
+        </div>
+
+        <span class="error-giant-digit">4</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="error-heading">Oops! You've Wandered</h1>
+      <div class="error-highlight-pill-wrap">
+        <span class="error-highlight-pill">Off The Carrier Grid</span>
+      </div>
+
+      <!-- Descriptive paragraph -->
+      <p class="error-description">
+        The telecom extension, agent dispatch channel, or telephony route you are attempting to dial has been re-routed by our cloud switchboard, placed on maintenance hold, or does not exist in our network registry.
+      </p>
+
+      <!-- Live Equalizer Signal Indicator -->
+      <div class="telecom-equalizer-wrap">
+        <span class="equalizer-text"><i class="fas fa-wave-square" style="color:var(--primary); margin-right:4px;"></i> Audio Carrier Monitor:</span>
+        <div class="equalizer-bars">
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+        </div>
+        <span class="equalizer-text" style="color:#ef4444; font-weight:700;"><i class="fas fa-phone-slash"></i> No Dial Tone</span>
+      </div>
+
+      <!-- Action Buttons Row (Exact layout from reference image) -->
+      <div class="error-actions-group">
+        <a href="index.html" class="btn-error-primary">
+          <i class="fas fa-phone-volume"></i>
+          <span>Browse Switchboard</span>
+          <i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i>
+        </a>
+        
+        <button type="button" class="btn-error-secondary" onclick="window.history.length > 1 ? window.history.back() : window.location.href='index.html';">
+          <i class="fas fa-rotate-left"></i>
+          <span>Previous Extension</span>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- Bottom Navigation Bar & Footer -->
+    <footer class="error-footer-bar">
+      <p class="error-copyright-note">
+        &copy; 2026 <strong>Stackly</strong> Call Center &amp; Customer Solutions. All rights reserved.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Interactive line test ping simulation when clicking on the center sphere
+    function testLinePing() {
+      const sphere = document.getElementById('interactiveSphere');
+      sphere.style.transform = 'scale(0.92)';
+      setTimeout(() => {
+        sphere.style.transform = 'scale(1.1)';
+      }, 150);
+      setTimeout(() => {
+        sphere.style.transform = '';
+      }, 350);
+
+      if (typeof showToast === 'function') {
+        showToast('Switchboard ping: Route EXT-404 is disconnected. Auto-routing to central dispatch...');
+      } else {
+        alert('Switchboard ping: Route EXT-404 is disconnected. Auto-routing to central dispatch...');
+      }
+    }
+
+
+    // Interactive mouse move subtle parallax for the floating badges
+    document.addEventListener('mousemove', (e) => {
+      const chips = document.querySelectorAll('.floating-chip:not(.chip-top-center), .code-tag-bottom-left');
+      const mouseX = (e.clientX / window.innerWidth) - 0.5;
+      const mouseY = (e.clientY / window.innerHeight) - 0.5;
+
+      chips.forEach((chip, index) => {
+        const factor = (index % 3 + 1) * 8;
+        chip.style.transform = `translate(${mouseX * factor}px, ${mouseY * factor}px)`;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1002 @@
+/* ==========================================================================
+   STACKLY - Admin & Customer Dashboards (Fixed Navigation & Mobile Responsive)
+   Includes Fixed Sidebar, Sticky Header, Categorized Menu Sections,
+   Sidebar Status/Plan Widgets, and Mobile Off-Canvas Drawer Navigation
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Dashboard Fixed Layout Architecture
+   -------------------------------------------------------------------------- */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  position: relative;
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100%;
+}
+
+/* Fixed Sidebar */
+.dashboard-sidebar {
+  width: 280px !important;
+  background-color: var(--dark-navy) !important;
+  color: var(--white);
+  display: flex !important;
+  flex-direction: column;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1000 !important;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease !important;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.18);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Custom Scrollbar for Sidebar */
+.dashboard-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.dashboard-sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
+}
+.dashboard-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+.dashboard-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Sidebar Brand Header */
+.sidebar-brand {
+  padding: 20px 22px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.sidebar-brand a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sidebar-brand img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.sidebar-close-btn {
+  display: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar-close-btn:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* Categorized Menu Container */
+.sidebar-menu {
+  padding: 16px 14px 24px !important;
+  display: flex !important;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+/* Section Titles / Category Dividers */
+.sidebar-section-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 14px 12px 6px;
+  margin-top: 6px;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.sidebar-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Sidebar Links */
+.sidebar-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px;
+  padding: 10px 14px !important;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-family: var(--font-nav);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.sidebar-link span {
+  display: inline-block !important;
+}
+
+.sidebar-link i {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff !important;
+  transform: translateX(3px);
+}
+
+.sidebar-link:hover i {
+  color: var(--primary);
+}
+
+.sidebar-link.active {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.sidebar-link.active i {
+  color: #ffffff;
+}
+
+/* Sidebar Status Badge */
+.sidebar-badge {
+  margin-left: auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.sidebar-badge.badge-live {
+  background: rgba(0, 208, 132, 0.2);
+  color: #00d084;
+  border: 1px solid rgba(0, 208, 132, 0.4);
+}
+.sidebar-badge.badge-count {
+  background: rgba(193, 46, 222, 0.25);
+  color: #f6e6fc;
+}
+
+/* --------------------------------------------------------------------------
+   2. Separate Content Widgets in Sidebar
+   -------------------------------------------------------------------------- */
+.sidebar-widget-card {
+  margin: 14px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.widget-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #00d084;
+  box-shadow: 0 0 8px #00d084;
+  display: inline-block;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.sidebar-widget-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.widget-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.widget-metric strong {
+  color: #ffffff;
+}
+
+.widget-progress-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.widget-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), #00d084);
+  border-radius: 99px;
+}
+
+/* Sidebar User Profile Box */
+.sidebar-user-box {
+  padding: 14px 18px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sidebar-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  flex-shrink: 0;
+}
+
+.sidebar-user-info {
+  display: block !important;
+  overflow: hidden;
+  flex: 1;
+}
+
+.sidebar-user-info strong {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 175px;
+}
+
+.sidebar-user-info span {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--primary) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 175px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Main Content & Fixed Topbar
+   -------------------------------------------------------------------------- */
+.dashboard-main {
+  margin-left: 280px !important;
+  width: calc(100% - 280px) !important;
+  padding-top: 70px !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-light);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Fixed Topbar Header */
+.dashboard-topbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 280px !important;
+  right: 0 !important;
+  width: calc(100% - 280px) !important;
+  height: 70px !important;
+  z-index: 900 !important;
+  background: #ffffff !important;
+  padding: 0 20px !important;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 16px rgba(24, 27, 42, 0.06);
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+.topbar-left-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+/* Mobile Toggle Hamburger Button */
+.dashboard-mobile-toggle {
+  display: none;
+  background: var(--bg-light);
+  border: 1px solid var(--border-light);
+  color: var(--dark-navy);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dashboard-mobile-toggle:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0 !important;
+  margin-left: auto;
+}
+
+.topbar-actions .btn {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+/* Backdrop Overlay for Mobile Drawer */
+.dashboard-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 20, 32, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 995;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dashboard-sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --------------------------------------------------------------------------
+   4. Mobile & Tablet Responsiveness (<= 992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  /* Show Mobile Hamburger */
+  .dashboard-mobile-toggle {
+    display: inline-flex !important;
+  }
+
+  .sidebar-close-btn {
+    display: inline-flex !important;
+  }
+
+  /* Make Sidebar an Off-Canvas Slide Drawer */
+  .dashboard-sidebar {
+    width: 280px !important;
+    transform: translateX(-100%) !important;
+    box-shadow: 6px 0 35px rgba(0, 0, 0, 0.45) !important;
+  }
+
+  .dashboard-sidebar.active {
+    transform: translateX(0) !important;
+  }
+
+  /* Show All Sidebar Spans & Details on Mobile */
+  .sidebar-link span,
+  .sidebar-brand span,
+  .sidebar-user-info,
+  .sidebar-section-title,
+  .sidebar-widget-card {
+    display: block !important;
+  }
+
+  .sidebar-section-title {
+    display: flex !important;
+  }
+
+  .sidebar-user-box {
+    display: flex !important;
+  }
+
+  .sidebar-link {
+    justify-content: flex-start !important;
+    padding: 10px 14px !important;
+  }
+
+  /* Main Content occupies full width with topbar offset */
+  .dashboard-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-top: 64px !important;
+  }
+
+  .dashboard-topbar {
+    left: 0 !important;
+    width: 100% !important;
+    height: 64px !important;
+    padding: 0 18px !important;
+  }
+
+  .topbar-search {
+    width: 220px;
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-split-grid,
+  .dashboard-hourly-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-quotas-subgrid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* Small Screens (<= 576px & 320px ultra-mobile) */
+@media (max-width: 576px) {
+  .dashboard-main {
+    padding-top: 56px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  .dashboard-topbar {
+    height: 56px !important;
+    padding: 0 10px !important;
+    gap: 6px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    right: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .topbar-left-group {
+    gap: 6px !important;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .topbar-portal-title,
+  .topbar-info-chip,
+  .topbar-status-badge {
+    display: none !important;
+  }
+
+  .topbar-portal-badge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+
+  .topbar-actions {
+    gap: 6px !important;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .topbar-actions .btn {
+    padding: 5px 9px !important;
+    font-size: 0.74rem !important;
+  }
+
+  .topbar-badge-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .dashboard-mobile-toggle {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .dashboard-content {
+    padding: 16px 10px !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Section Header Row Alignment */
+  .dashboard-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+  }
+
+  .dashboard-header-row h1,
+  .dashboard-header-row h2 {
+    font-size: 1.4rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .dashboard-header-row p {
+    font-size: 0.82rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .dashboard-header-btns {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .dashboard-header-btns .btn,
+  .dashboard-header-btns a.btn {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .dashboard-table-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .dashboard-table-header .btn,
+  .dashboard-table-header a.btn {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .dashboard-table-card {
+    padding: 16px 12px !important;
+    border-radius: 12px !important;
+    margin-bottom: 18px !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .kpi-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-bottom: 18px !important;
+    width: 100% !important;
+  }
+
+  .kpi-card {
+    grid-column: span 1 !important;
+    padding: 14px 16px !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .kpi-number {
+    font-size: 1.6rem !important;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .ticket-filter-btn,
+  .filter-tab-btn,
+  .shop-cat-btn {
+    font-size: 0.72rem !important;
+    padding: 5px 8px !important;
+  }
+
+  .filter-tabs-bar {
+    width: 100% !important;
+    gap: 6px !important;
+  }
+
+  /* Fallback to collapse any inline multi-column grids on mobile */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Ensure table scroll wrapper handles touch smoothly */
+  .dashboard-table-card div[style*="overflow-x"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Smooth Scrolling & Anchor Offset
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 85px;
+}
+
+/* --------------------------------------------------------------------------
+   6. Hardware Shop Equipment Showcase Cards
+   -------------------------------------------------------------------------- */
+.dashboard-shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.dashboard-shop-item {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(24, 27, 42, 0.04);
+}
+
+.dashboard-shop-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(24, 27, 42, 0.09);
+  border-color: var(--primary);
+}
+
+.shop-item-badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.shop-item-badge.in-stock {
+  background: #e6ffed;
+  color: var(--secondary);
+}
+.shop-item-badge.noc {
+  background: #f3e8ff;
+  color: var(--primary);
+}
+
+.shop-item-price {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--dark-navy);
+  margin: 12px 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. VIP Membership Privileges Grid
+   -------------------------------------------------------------------------- */
+.vip-privileges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.vip-privilege-card {
+  background: linear-gradient(145deg, #ffffff 0%, #faf8fc 100%);
+  border: 1.5px solid #ebd4f7;
+  border-radius: 16px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(193, 46, 222, 0.06);
+  transition: all 0.25s ease;
+}
+
+.vip-privilege-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(193, 46, 222, 0.12);
+  border-color: var(--primary);
+}
+
+.vip-privilege-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), #00d084);
+}
+
+.vip-privilege-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 992px) {
+  .dashboard-shop-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .vip-privileges-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-shop-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .vip-privileges-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Dedicated Section Switching Panes
+   -------------------------------------------------------------------------- */
+.dashboard-section-panel {
+  display: none;
+  animation: fadeInPanel 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dashboard-section-panel.active {
+  display: block;
+}
+
+@keyframes fadeInPanel {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-tabs-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filter-tab-btn {
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border-light);
+  background: var(--white);
+  color: var(--text-body);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-tab-btn:hover,
+.filter-tab-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* --------------------------------------------------------------------------
+   9. Header Menu Bar Content Styles
+   -------------------------------------------------------------------------- */
+.topbar-portal-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Topbar Brand Logo */
+.topbar-brand-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--dark-navy, #0b0f19);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.topbar-brand-link:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.topbar-brand-logo {
+  height: 22px;
+  width: auto;
+  max-width: 95px;
+  object-fit: contain;
+  display: block;
+}
+
+.topbar-portal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 4px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.topbar-portal-badge.admin {
+  background: rgba(193, 46, 222, 0.12);
+  color: var(--primary);
+  border: 1px solid rgba(193, 46, 222, 0.25);
+}
+
+.topbar-portal-badge.client {
+  background: rgba(0, 208, 132, 0.12);
+  color: #0b8a59;
+  border: 1px solid rgba(0, 208, 132, 0.25);
+}
+
+.topbar-portal-title {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-portal-title strong {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--dark-navy);
+  white-space: nowrap;
+}
+
+.topbar-info-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f6f7fb;
+  border: 1px solid #e7eaf3;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-body);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.topbar-info-chip.live-clock {
+  font-family: monospace;
+  font-size: 0.76rem;
+  background: #ffffff;
+}
+
+.topbar-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--secondary);
+  background: #e6ffed;
+  border: 1px solid rgba(0, 208, 132, 0.3);
+  padding: 4px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--secondary);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+  .topbar-info-chip {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar-status-badge {
+    display: none !important;
+  }
+  .topbar-portal-title strong {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .topbar-brand-link {
+    padding: 3px 8px;
+  }
+  .topbar-brand-logo {
+    height: 18px;
+    max-width: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar-portal-title {
+    display: none !important;
+  }
+}
+
+
