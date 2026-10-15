@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================================== */
 function initHeaderAuth() {
   document.querySelectorAll('.header-login-btn').forEach(btn => {
-    btn.href = 'login.html';
-    btn.innerHTML = `<i class="fas fa-sign-in-alt"></i> <span>Login</span>`;
-    btn.title = 'Account Login';
+    btn.href = 'signup.html';
+    btn.innerHTML = `<i class="fas fa-arrow-right"></i> <span>Get Started</span>`;
+    btn.title = 'Get Started with Stackly';
   });
   document.querySelectorAll('.header-login-btn-mobile').forEach(btn => {
-    btn.href = 'login.html';
-    btn.innerHTML = `<i class="fas fa-sign-in-alt"></i> <span>Login</span>`;
-    btn.title = 'Account Login';
+    btn.href = 'signup.html';
+    btn.innerHTML = `<i class="fas fa-arrow-right"></i> <span>Get Started</span>`;
+    btn.title = 'Get Started with Stackly';
   });
 }
 
@@ -51,13 +51,17 @@ function initStickyHeader() {
   const header = document.querySelector('.main-header');
   if (!header) return;
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
+  const handleScroll = () => {
+    if (window.scrollY > 30) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-  });
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  // Run on initial load to handle pre-scrolled page / reload
+  handleScroll();
 }
 
 /* ==========================================================================
